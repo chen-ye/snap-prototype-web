@@ -105,21 +105,21 @@ class ThreeARManager {
         mesh.position.y	= geometry.parameters.height/2
         scene.add( mesh );
 
-        // const loader = new THREE.OBJLoader2();
+        const loader = new THREE.OBJLoader2();
         // loader.loadMtl(
         //     shoe.geometry.mtl,
         //     null,
         //     (materials) => {
         //         loader.setMaterials(materials);
-        //         loader.load(
-        //             shoe.geometry.obj,
-        //             (event) => {
-        //                 const object = event.detail.loaderRootNode;        
-        //                 object.rotateY(Math.PI/2);
-        //                 object.translateY(-2.5);
-        //                 scene.add(object);
-        //             }
-        //         )
+                loader.load(
+                    shoe.geometry.obj,
+                    (event) => {
+                        const object = event.detail.loaderRootNode;        
+                        object.rotateY(Math.PI/2);
+                        object.translateY(-2.5);
+                        scene.add(object);
+                    }
+                )
         //     }
         // );
         
