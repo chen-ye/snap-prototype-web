@@ -1,0 +1,70 @@
+.App .AppMenu.ui.fixed.menu {
+  position: sticky;
+}
+
+.App-bodyContainer {
+  /* padding: 1em; */
+}
+
+.AppList-container {
+  transition: visibility .5s ease, opacity .5s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+.AppList-container.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.Shoe-modelContainer {
+  height: 10em;
+}
+
+.Shoe-description {
+  margin-bottom: 1em;
+}
+
+.ShoeView-container {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: visibility .5s ease, opacity .5s ease;
+  /* -webkit-overflow-scrolling: touch; */
+}
+
+.ShoeView-container.active {
+  visibility: visible;
+  pointer-events: unset;
+  opacity: 1;
+}
+
+#ShoeViewer {
+  position: absolute;
+  width: 100vw;
+  height: calc(88vh - 64px - 40px);
+  z-index: -5;
+  touch-action: none;
+}
+
+.ShoeView-actions {
+  position: fixed;
+  top:  calc(88vh - 64px - 40px - 2em);
+  padding: 1em;
+  z-index: -1;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.ShoeView-details {
+  z-index: 100;
+  background: white;
+  margin-top: calc(88vh - 64px - 40px);
+}
