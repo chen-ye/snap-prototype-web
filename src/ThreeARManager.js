@@ -2,6 +2,10 @@
 /*global THREEx*/
 
 class ThreeARManager {
+    constructor() {
+        this.shouldRender = true;
+    }
+
     initializeThreeAR = (container, shoe) => {
         const renderer	= new THREE.WebGLRenderer({
             antialias: true,
@@ -95,33 +99,39 @@ class ThreeARManager {
         //		add an object in the scene
         //////////////////////////////////////////////////////////////////////////////////
         // add a torus knot	
-        var geometry	= new THREE.CubeGeometry(1,1,1);
-        var material	= new THREE.MeshNormalMaterial({
-            transparent : true,
-            opacity: 0.5,
-            side: THREE.DoubleSide
-        }); 
-        var mesh	= new THREE.Mesh( geometry, material );
-        mesh.position.y	= geometry.parameters.height/2
-        scene.add( mesh );
+        // var geometry	= new THREE.CubeGeometry(1,1,1);
+        // var material	= new THREE.MeshNormalMaterial({
+        //     transparent : true,
+        //     opacity: 0.5,
+        //     side: THREE.DoubleSide
+        // }); 
+        // var mesh	= new THREE.Mesh( geometry, material );
+        // mesh.position.y	= geometry.parameters.height/2
+        // scene.add( mesh );
+
+        scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
+        const light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        light.position.set( 1, 1, 1 );
+        scene.add( light );
 
         const loader = new THREE.OBJLoader2();
-        // loader.loadMtl(
-        //     shoe.geometry.mtl,
-        //     null,
-        //     (materials) => {
-        //         loader.setMaterials(materials);
+        loader.loadMtl(
+            shoe.geometry.mtl,
+            null,
+            (materials) => {
+                loader.setMaterials(materials);
                 loader.load(
                     shoe.geometry.obj,
                     (event) => {
                         const object = event.detail.loaderRootNode;        
                         object.rotateY(Math.PI/2);
                         object.translateY(-2.5);
+                        object.scale = new THREE.Vector3(.5, .5, .5);
                         scene.add(object);
                     }
                 )
-        //     }
-        // );
+            }
+        );
         
         // var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
         // var material	= new THREE.MeshNormalMaterial(); 
@@ -143,7 +153,9 @@ class ThreeARManager {
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
             // keep looping
-            requestAnimationFrame( animate );
+            if(this.shouldRender) {
+                requestAnimationFrame( animate );
+            }
             // measure time
             lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
             var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
@@ -155,7 +167,8 @@ class ThreeARManager {
         })
     }
 
-    dispose() {
+    dispose = () => {
+        this.shouldRender = false;
     }
 }
 

@@ -33,8 +33,18 @@ class ThreeManager {
 
         this.bindEventListeners();
 
+        this.shouldRender = true;
         this.render();
         // this.arToolkitSource.init(this.resizeCanvas)
+    }
+
+    pauseRendering = () => {
+        this.shouldRender = false;
+    }
+
+    resumeRendering = () => {
+        this.shouldRender = true;
+        this.render();
     }
 
     setShoeViewer = (shoeViewerElement) => {
@@ -227,7 +237,9 @@ class ThreeManager {
         }
 
         this.prevFrame = time;
-        requestAnimationFrame(this.render);
+        if(this.shouldRender) {
+            requestAnimationFrame(this.render);
+        }
     }
 }
 

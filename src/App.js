@@ -195,6 +195,7 @@ class App extends Component {
     this.setState({
       arMode: true,
     });
+    ThreeManager.pauseRendering();
     this.arManager = new ThreeARManager();
     this.arManager.initializeThreeAR(this.arTarget, shoes[this.state.activeShoe]);
   }
@@ -203,7 +204,8 @@ class App extends Component {
     this.setState({
       arMode: false,
     });
-    
+    ThreeManager.resumeRendering();
+    this.arManager.dispose();
   }
 
   render() {
@@ -253,12 +255,12 @@ class App extends Component {
           <div id="ShoeView" className={classNames("ShoeView-container", {active: activeShoe})}>
             <div id="ShoeViewer" ref={element => ThreeManager.setShoeViewer(element)}></div>
             <div className="ShoeView-actions">
-              <Button.Group basic className="ShoeView-toggles">
+              <Button.Group basic className="ShoeView-toggles" inverted={arMode}>
                 <Button active={!arMode} onClick={this.handle3DModeClick}>3D</Button>
                 <Button active={arMode} onClick={this.handleARModeClick}>AR</Button>
               </Button.Group>
               { arMode ? (
-                <Button.Group basic className="ShoeView-views">
+                <Button.Group basic className="ShoeView-views" inverted>
                   <Button active>On Ground</Button>
                   <Button>Worn</Button>
                 </Button.Group>
