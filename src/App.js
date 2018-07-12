@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { Header, Icon, Menu, Container, Grid, Button, Dropdown } from 'semantic-ui-react'
 
 import ThreeManager from './ThreeManager';
+import ThreeARManager from './ThreeARManager';
 
 import './App.css';
 
@@ -193,13 +194,16 @@ class App extends Component {
   handleARModeClick = () => {
     this.setState({
       arMode: true,
-    })
+    });
+    this.arManager = new ThreeARManager();
+    this.arManager.initializeThreeAR(this.arTarget, shoes[this.state.activeShoe]);
   }
 
   handle3DModeClick = () => {
     this.setState({
       arMode: false,
-    })
+    });
+    
   }
 
   render() {
@@ -216,6 +220,7 @@ class App extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
+        <div id="ShoeViewerAR" ref={element => this.arTarget = element}></div>
         <div className="App-bodyContainer">
           <Container className={classNames("AppList-container", {active: !this.state.activeShoe})}>
             {/* <Scene vr-mode-ui="enabled: false">

@@ -17,15 +17,15 @@ class ThreeManager {
         this.renderer.setClearColor( 0xffffff, 1 );
         this.renderer.setPixelRatio( window.devicePixelRatio );
 
-        this.arToolkitSource = new THREEx.ArToolkitSource({
-            // to read from the webcam 
-            sourceType : 'webcam',	
-        });
+        // this.arToolkitSource = new THREEx.ArToolkitSource({
+        //     // to read from the webcam 
+        //     sourceType : 'webcam',	
+        // });
 
-        this.arToolkitContext = new THREEx.ArToolkitContext({
-            cameraParametersUrl: 'lib/camera_para.dat',
-            detectionMode: 'mono',
-        });
+        // this.arToolkitContext = new THREEx.ArToolkitContext({
+        //     cameraParametersUrl: 'lib/camera_para.dat',
+        //     detectionMode: 'mono',
+        // });
 
         // this.arToolkitContext.init(() => {
         //     this.projectionMatrix = this.arToolkitContext.getProjectionMatrix();
@@ -34,7 +34,7 @@ class ThreeManager {
         this.bindEventListeners();
 
         this.render();
-        this.arToolkitSource.init(this.resizeCanvas)
+        // this.arToolkitSource.init(this.resizeCanvas)
     }
 
     setShoeViewer = (shoeViewerElement) => {
@@ -61,7 +61,7 @@ class ThreeManager {
         const orbitGroup = new THREE.Group();
         lookGroup.add(orbitGroup);
 
-        const orbitControls = new THREE.OrbitControls( camera, this.shoeViewerElement );
+        const orbitControls = new THREE.OrbitControls( camera, document.getElementById('ShoeViewer') );
         orbitControls.minDistance = 6;
         orbitControls.maxDistance = 24;
         orbitControls.enablePan = false;
@@ -126,12 +126,12 @@ class ThreeManager {
 
         this.renderer.setSize( this.canvas.width, this.canvas.height, false );
 
-        if( this.arToolkitSource.ready ) {
-            this.arToolkitSource.onResizeElement();
-            if( this.arToolkitContext.arController !== null ){
-                this.arToolkitSource.copySizeTo(this.arToolkitContext.arController.canvas)	
-            }	
-        }
+        // if( this.arToolkitSource.ready ) {
+        //     this.arToolkitSource.onResizeElement();
+        //     if( this.arToolkitContext.arController !== null ){
+        //         this.arToolkitSource.copySizeTo(this.arToolkitContext.arController.canvas)	
+        //     }	
+        // }
     }
 
     bindEventListeners = () => {
@@ -145,9 +145,9 @@ class ThreeManager {
     }
 
     render = (time) => {
-        if( this.arToolkitSource.ready ) {
-            this.arToolkitContext.update( this.arToolkitSource.domElement )
-        }
+        // if( this.arToolkitSource.ready ) {
+        //     this.arToolkitContext.update( this.arToolkitSource.domElement )
+        // }
 
         this.renderer.setClearColor( 0xffffff );
         this.renderer.setScissorTest( false );

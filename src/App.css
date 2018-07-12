@@ -53,6 +53,14 @@
   touch-action: none;
 }
 
+#ShoeViewerAR {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: calc(88vh - 64px);
+  touch-action: none;
+}
+
 .ShoeView-actions {
   position: fixed;
   top:  calc(88vh - 64px - 40px - 2em);
