@@ -115,23 +115,23 @@ class ThreeARManager {
         scene.add( light );
 
         const loader = new THREE.OBJLoader2();
-        // loader.loadMtl(
-        //     shoe.geometry.mtl,
-        //     null,
-        //     (materials) => {
-        //         loader.setMaterials(materials);
+        loader.loadMtl(
+            shoe.geometry.mtl,
+            null,
+            (materials) => {
+                loader.setMaterials(materials);
                 loader.load(
                     shoe.geometry.obj,
                     (event) => {
                         const object = event.detail.loaderRootNode;        
-                        object.rotateY(Math.PI/2);
-                        object.translateY(-2.5);
-                        object.scale.set(.5, .5, .5);
+                        // object.rotateY(Math.PI/2);
+                        // object.translateY(-2.5);
+                        object.scale.set(.35, .35, .35);
                         scene.add(object);
                     }
                 )
-        //     }
-        // );
+            }
+        );
         
         // var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
         // var material	= new THREE.MeshNormalMaterial(); 
