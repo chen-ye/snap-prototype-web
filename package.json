@@ -1,5 +1,6 @@
 {
   "name": "snap-prototype-web",
+  "homepage": "https://cye.me/snap-prototype-web/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
