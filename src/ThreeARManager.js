@@ -3,7 +3,7 @@
 
 class ThreeARManager {
     constructor() {
-        this.shouldRender = true;
+        // this.shouldRender = true;
     }
 
     initializeThreeAR = (container, shoe) => {
@@ -115,23 +115,23 @@ class ThreeARManager {
         scene.add( light );
 
         const loader = new THREE.OBJLoader2();
-        loader.loadMtl(
-            shoe.geometry.mtl,
-            null,
-            (materials) => {
-                loader.setMaterials(materials);
+        // loader.loadMtl(
+        //     shoe.geometry.mtl,
+        //     null,
+        //     (materials) => {
+        //         loader.setMaterials(materials);
                 loader.load(
                     shoe.geometry.obj,
                     (event) => {
                         const object = event.detail.loaderRootNode;        
                         object.rotateY(Math.PI/2);
                         object.translateY(-2.5);
-                        object.scale = new THREE.Vector3(.5, .5, .5);
+                        object.scale.set(.5, .5, .5);
                         scene.add(object);
                     }
                 )
-            }
-        );
+        //     }
+        // );
         
         // var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
         // var material	= new THREE.MeshNormalMaterial(); 
@@ -151,11 +151,10 @@ class ThreeARManager {
         })
         // run the rendering loop
         var lastTimeMsec= null
+        
         requestAnimationFrame(function animate(nowMsec){
             // keep looping
-            if(this.shouldRender) {
-                requestAnimationFrame( animate );
-            }
+            requestAnimationFrame( animate );
             // measure time
             lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
             var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
@@ -168,7 +167,7 @@ class ThreeARManager {
     }
 
     dispose = () => {
-        this.shouldRender = false;
+        // this.shouldRender = false;
     }
 }
 
