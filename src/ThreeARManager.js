@@ -126,7 +126,7 @@ class ThreeARManager {
                         const object = event.detail.loaderRootNode;        
                         // object.rotateY(Math.PI/2);
                         // object.translateY(-2.5);
-                        object.scale.set(.35, .35, .35);
+                        object.scale.set(.27, .27, .27);
                         scene.add(object);
                     }
                 )
